@@ -1,0 +1,39 @@
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Towers of Hanoi</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Towers of Hanoi Simulation</h1>
+  <p id='test'></p>
+
+  <div>
+    <canvas id="left" width="200px" height="300px" style="background:lightslategray; margin: 5px"></canvas>
+    <canvas id="middle" width="200px" height="300px" style="background:lightslategray; margin: 5px"></canvas>
+    <canvas id="right" width="200px" height="300px" style="background:lightslategray; margin: 5px"></canvas>
+  </div>
+
+  <h3>Simulation Area:</h3>
+  <div>
+    <button type="button" id='start' class='button'>Start</button>
+    <button type="button" id='stop' class='button'>Stop</button>
+    <button type="button" id='reset' class='button'>Reset</button>
+  </div>
+
+  <h3>Testing Area:</h3>
+  <div>
+    <button type="button" id='push' class='button'>Push</button>
+    <button type="button" id='pop' class='button'>Pop</button>
+    <button type="button" id='push_animated' class='button'>Push Animated</button>
+    <button type="button" id='pop_animated' class='button'>Pop Animated</button>
+    <button type="button" id='clear' class='button'>Clear</button>
+  </div>
+
+  <script defer src="main.dart.js"></script>
+</body>
+
+</html>

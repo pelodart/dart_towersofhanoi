@@ -1,0 +1,19 @@
+name: towers_of_hanoi
+version: 1.0.0
+description: >-
+  Towers of Hanoi
+author: PeLo
+dependencies:
+  sprintf: "^4.0.0"
+environment:
+  sdk: '>=2.0.0 <3.0.0'
+packages:
+  browser:
+    description: browser
+    source: hosted
+    version: "0.10.0+1"
+dev_dependencies:
+  build_runner: "^1.0.0"
+  build_test: "^0.10.2"
+  build_web_compilers: "^0.4.0"
+  
