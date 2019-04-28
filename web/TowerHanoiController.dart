@@ -111,39 +111,39 @@ class TowerHanoiController {
     _rightView.clear();
   }
 
-  void onStateChanged(int tower, Direction direction) {
+  void onStateChanged(Towers tower, Direction direction) {
     print('onStateChanged ' + tower.toString());
 
     if (direction == Direction.Down) {
       switch (tower) {
-        case 1: // Left
+        case Towers.Left:
           _leftView.pushAnimated(_lastSize);
           _host.run();
           break;
 
-        case 2: // Middle
+        case Towers.Middle:
           _middleView.pushAnimated(_lastSize);
           _host.run();
           break;
 
-        case 3: // Right
+        case Towers.Right:
           _rightView.pushAnimated(_lastSize);
           _host.run();
           break;
       }
     } else if (direction == Direction.Up) {
       switch (tower) {
-        case 1: // Left
+        case Towers.Left:
           _lastSize = _leftView.popAnimated();
           _host.run();
           break;
 
-        case 2: // Middle
+        case Towers.Middle:
           _lastSize = _middleView.popAnimated();
           _host.run();
           break;
 
-        case 3: // Right
+        case Towers.Right:
           _lastSize = _rightView.popAnimated();
           _host.run();
           break;

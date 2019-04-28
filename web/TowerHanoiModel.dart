@@ -1,13 +1,9 @@
 import 'dart:async';
 
-// TODO: Was geht hier von in die Klasse rein
-
 enum Direction { Up, Down }
+enum Towers { Left, Middle, Right }
 
-// TODO: Verwenden !!!
-// enum Towers { Left, Middle, Right }
-
-typedef StateChangeListener = void Function(int tower, Direction direction);
+typedef StateChangeListener = void Function(Towers tower, Direction direction);
 
 class TowerHanoiModel {
   static const int NumDiscs = 3;
@@ -24,6 +20,7 @@ class TowerHanoiModel {
     _listener = null;
   }
 
+  // public interface
   void register(StateChangeListener listener) {
     _listener = listener;
   }
@@ -33,10 +30,10 @@ class TowerHanoiModel {
   }
 
   void doSimulation() {
-    this._moveTower(_discs, 1, 2, 3);
+    this._moveTower(_discs, Towers.Left, Towers.Middle, Towers.Right);
   }
 
-  void _moveTower(int discs, int from, int tmp, int to) {
+  void _moveTower(int discs, Towers from, Towers tmp, Towers to) {
     if (discs > 0) {
       _moveTower(discs - 1, from, to, tmp); // move tower of height n-1
       _moveDisc(from, to); // move lowest disc
@@ -44,7 +41,7 @@ class TowerHanoiModel {
     }
   }
 
-  void _moveDisc(int towerFrom, int towerTo) {
+  void _moveDisc(Towers towerFrom, Towers towerTo) {
     print('Moving disc ' + towerFrom.toString() + ' to ' + towerTo.toString());
 
     Future.delayed(
@@ -56,11 +53,11 @@ class TowerHanoiModel {
   }
 
   // helper methods
-  void _removeDisc(int tower) {
+  void _removeDisc(Towers tower) {
     if (_listener != null) _listener(tower, Direction.Up);
   }
 
-  void _addDisc(int tower) {
+  void _addDisc(Towers tower) {
     if (_listener != null) _listener(tower, Direction.Down);
   }
 }

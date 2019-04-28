@@ -73,6 +73,7 @@ class TowerHanoiView {
       _drawDisc(rect);
     }
 
+    // draw floating disc, if any
     if (_floatingRect != null) {
       _drawDisc(_floatingRect, fill: "yellowgreen");
     }
