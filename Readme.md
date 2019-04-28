@@ -11,7 +11,7 @@ Nachdem Sie und ich noch am Leben sind, betrachten wir in dieser Aufgabe eine Si
 
 Zu Beginn unserer Simulation dürfen sich auf einem der Pfähle eine bis sieben Scheiben in Pyramidenform auftürmen: Die kleineren Scheiben liegen auf den größeren Scheiben (Abbildung 1). Ein zweiter und ein dritter Pfahl sind in der Ausgangssituation leer. Der zweite Pfahl dient als Hilfspfahl für temporäre Ablagen, um die zweite Randbedingung zu erfüllen. Der dritte Pfahl ist das Ziel der Verschiebungsoperationen.
 
-<img src="assets/TowersOfHanoiGeneral.png" width="600">
+<img src="assets/TowersOfHanoiGeneral.png" width="400">
 Abbildung 1. Die Türme von Hanoi: Ausgangs- und Endzustand.
 
 

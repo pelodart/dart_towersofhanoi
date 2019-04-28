@@ -1,8 +1,11 @@
 import 'dart:async';
 
+// TODO: Was geht hier von in die Klasse rein
+
 enum Direction { Up, Down }
 
-enum Towers { Left, Middle, Right }
+// TODO: Verwenden !!!
+// enum Towers { Left, Middle, Right }
 
 typedef StateChangeListener = void Function(int tower, Direction direction);
 
