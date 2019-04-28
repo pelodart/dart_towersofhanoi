@@ -19,6 +19,8 @@ class TowerHanoiController {
   ButtonElement _popAnimatedButton;
   ButtonElement _clearButton;
 
+  InputElement _input;
+
   TowerHanoiView _leftView;
   TowerHanoiView _middleView;
   TowerHanoiView _rightView;
@@ -37,6 +39,7 @@ class TowerHanoiController {
     _pushAnimatedButton = querySelector("#push_animated");
     _popAnimatedButton = querySelector("#pop_animated");
     _clearButton = querySelector("#clear");
+    _input = querySelector("#log");
 
     _startButton.onClick.listen(startSimulation);
     _stopButton.onClick.listen(stopSimulation);
@@ -61,8 +64,8 @@ class TowerHanoiController {
     print('start');
 
     // initialize left tower
-    for (int i = 0; i < TowerHanoiModel.NumDiscs; i++) {
-      _leftView.push(TowerHanoiModel.NumDiscs - i);
+    for (int i = 0; i < _model.NumDiscs; i++) {
+      _leftView.push(_model.NumDiscs - i);
     }
     _model.doSimulation();
   }
@@ -77,12 +80,13 @@ class TowerHanoiController {
     _leftView.clear();
     _middleView.clear();
     _rightView.clear();
+    _input.value = '';
   }
 
   // testing area
   void pushSimulation(Event e) {
     print('push');
-    int size = _random.nextInt(TowerHanoiModel.NumDiscs) + 1;
+    int size = _random.nextInt(_model.NumDiscs) + 1;
     _leftView.push(size);
   }
 
@@ -93,7 +97,7 @@ class TowerHanoiController {
 
   void pushAnimatedSimulation(Event e) {
     print('pushAnimated');
-    int size = _random.nextInt(TowerHanoiModel.NumDiscs) + 1;
+    int size = _random.nextInt(_model.NumDiscs) + 1;
     _leftView.pushAnimated(size);
     _host.run();
   }
@@ -113,6 +117,15 @@ class TowerHanoiController {
 
   void onStateChanged(Towers tower, Direction direction) {
     print('onStateChanged ' + tower.toString());
+
+    // print log message
+    String t = (tower == Towers.Left)
+        ? "left tower"
+        : (tower == Towers.Middle) ? "middle tower" : "right tower";
+    String msg = (direction == Direction.Down)
+        ? "Adding disc to " + t
+        : "Removing disc from " + t;
+    _input.value = msg;
 
     if (direction == Direction.Down) {
       switch (tower) {

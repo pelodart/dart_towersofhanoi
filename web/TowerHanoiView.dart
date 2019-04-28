@@ -1,8 +1,6 @@
 import 'dart:core';
 import 'dart:html';
-
 import 'package:sprintf/sprintf.dart';
-import 'TowerHanoiModel.dart';
 
 class TowerHanoiView {
   static const int Margin = 15;
@@ -80,16 +78,14 @@ class TowerHanoiView {
   }
 
   void push(int size) {
-    assert(size >= 1 && size <= TowerHanoiModel.NumDiscs);
+    assert(size >= 1 && size <= _numDiscs);
     if (_currentDiscs == _numDiscs) return;
     if (_downSimulationIsActive || _upSimulationIsActive) return;
 
     _currentDiscs++;
-    int left = Margin + _delta * (TowerHanoiModel.NumDiscs - size + 1);
+    int left = Margin + _delta * (_numDiscs - size + 1);
     int top = _height - (_currentDiscs + 1) * BarHeight - Margin;
-    int width = _width -
-        2 * Margin -
-        2 * _delta * (TowerHanoiModel.NumDiscs - size + 1);
+    int width = _width - 2 * Margin - 2 * _delta * (_numDiscs - size + 1);
     int height = BarHeight;
 
     DiscRectangle rect = new DiscRectangle(size, left, top, width, height);
@@ -100,7 +96,7 @@ class TowerHanoiView {
   }
 
   void pushAnimated(int size) {
-    assert(size >= 1 && size <= TowerHanoiModel.NumDiscs);
+    assert(size >= 1 && size <= _numDiscs);
     if (_currentDiscs == _numDiscs) return;
     if (_downSimulationIsActive || _upSimulationIsActive) return;
 
@@ -113,11 +109,9 @@ class TowerHanoiView {
     print(sprintf("pushAnimated ==> # discs = %d", [_listRectangles.length]));
 
     // create a floating rectangle
-    int left = Margin + _delta * (TowerHanoiModel.NumDiscs - size + 1);
+    int left = Margin + _delta * (_numDiscs - size + 1);
     int top = 3 * Margin;
-    int width = _width -
-        2 * Margin -
-        2 * _delta * (TowerHanoiModel.NumDiscs - size + 1);
+    int width = _width - 2 * Margin - 2 * _delta * (_numDiscs - size + 1);
     int height = BarHeight;
 
     _floatingRect = new DiscRectangle(size, left, top, width, height);

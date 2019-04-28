@@ -6,7 +6,7 @@ enum Towers { Left, Middle, Right }
 typedef StateChangeListener = void Function(Towers tower, Direction direction);
 
 class TowerHanoiModel {
-  static const int NumDiscs = 3;
+  static const int _NumDiscs = 3;
   static const int Pause = 4;
 
   int _discs;
@@ -14,11 +14,14 @@ class TowerHanoiModel {
 
   StateChangeListener _listener;
 
-  TowerHanoiModel() {
-    _discs = NumDiscs;
+  TowerHanoiModel([int discs]) {
+    _discs = (discs != null) ? discs : _NumDiscs;
     _distance = 0;
     _listener = null;
   }
+
+  // getter
+  int get NumDiscs => _discs;
 
   // public interface
   void register(StateChangeListener listener) {
