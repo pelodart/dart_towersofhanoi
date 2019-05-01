@@ -90,6 +90,7 @@ Die öffentlichen Methoden der Klasse ``IntegerSet`` finden Sie in Tabelle 2 vor
 | `unregister` | `void unregister (StateChangeListener listener);`<br/> Dienst zum Abmelden einer Rückrufmethode (Callback-Funktion). Die Callback-Funktion muss zuvor mit `register` angemeldet worden sein. |
 | `register` | `void register (StateChangeListener listener);`<br/> Benachrichtigungen in einem `TowerHanoiModel`-Objekt erfolgen ereignisgesteuert. Zum Anmelden einer Rückrufmethode (Callback-Funktion) dient die `register`-Methode. |
 | `doSimulation`     | `void doSimulation();`<br/> Startet (rekursiv) eine Simulation. Die angemeldete Rückrufmethode wird in zyklischen Zeitabständen aufgerufen. |
+
 Tabelle 1. Öffentliche Elemente der Klasse `TowerHanoiModel`.
 
 In der Entwicklung einer Sicht (*View*) greifen wir auf ein HTML5 `Canvas` Steuerelement zurück. Dabei gilt es die Entscheidung zu treffen, alle drei Türme oder nur einen Turm pro c zu realisieren. Ich habe mich für *einen* Turm pro Steuerelement entschieden, siehe dazu ein Beispiel in Abbildung 6:
@@ -125,6 +126,7 @@ Für die Implementierung einer Klasse `TowerHanoiView` bieten sich folgende Elem
 | `popAnimated`     | `int popAnimated();`<br/> Die `popAnimated`-Animated-Methode arbeitet prinzipiell wie die Methode `pop`, nur erfolgt das Entfernen der Scheibe grafisch animiert. |
 | `update`     | `void update();`<br/> Ist eine Hilfsmethode für die beiden Methoden `pushAnimated` und `popAnimated`. Eine temporäre Scheibe wird animiert nach unten bzw. nach oben bewegt. Das Zeichnen der Scheibe wird von der Methode `render` durchgeführt; `update` nimmt die Berechnungen der Koordinaten vor. Die Implementierung von `update` sollte auf die `requestAnimationFrame`-Funktion des Browsers zurückgreifen. Mit ihrer Hilfe lassen sich Animations-Funktionen (hier: `render`) gezielt aufrufen und man erhält auf diese Weise einen weichen Übergang von einem Frame zum nächsten. |
 | `render`     | `void render();`<br/> Zeichnet ein `TowerHanoiView`-Steuerelement. Dies sind der Hintergrund, ein vertikaler und ein horizontaler Balken, die festliegenden Scheiben und optional eine Animationsscheibe zur Unterstützung der beiden Methoden `pushAnimated` und `popAnimated`. |
+
 Tabelle 2. Öffentliche Elemente der Klasse `TowerHanoiView`.
 
 Eine Klasse `TowerHanoiController` fehlt schließendlich noch zur Umsetzung einer Anwendung auf Basis des MVC-Entwurfsmusters. Im wesentlich besitzt sie eine Reihe von Methoden, die mit den HTML5-`Button`-Steuerelementen aus Abbildung 1 verknüpft sind. Für alle weiteren Details meiner Umsetzung werfen Sie doch bitte einen Blick in den Quellcode.
