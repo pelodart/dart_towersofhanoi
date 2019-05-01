@@ -7,7 +7,7 @@ import 'TowerHanoiView.dart';
 
 void main() {
   // create model
-  TowerHanoiModel model = new TowerHanoiModel(7);
+  TowerHanoiModel model = new TowerHanoiModel(4);
 
   // create views
   TowerHanoiView leftView =

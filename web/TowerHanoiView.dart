@@ -2,6 +2,8 @@ import 'dart:core';
 import 'dart:html';
 import 'package:sprintf/sprintf.dart';
 
+import 'DiscRectangle.dart';
+
 class TowerHanoiView {
   static const int Margin = 15;
   static const int BarHeight = 20;
@@ -10,7 +12,7 @@ class TowerHanoiView {
   final CanvasElement _canvas;
   final int _width;
   final int _height;
-  final int _numDiscs;
+  final int _maxDiscs;
 
   int _delta;
   int _currentDiscs;
@@ -23,12 +25,12 @@ class TowerHanoiView {
   bool _upSimulationIsActive;
   bool _downSimulationIsActive;
 
-  TowerHanoiView(this._canvas, this._numDiscs)
+  TowerHanoiView(this._canvas, this._maxDiscs)
       : _width = _canvas.width,
         _height = _canvas.height {
     print("_width=" + _width.toString() + ", _height=" + _height.toString());
 
-    _delta = (_width ~/ 2 - Margin - BarWidth ~/ 2) ~/ (_numDiscs + 1);
+    _delta = (_width ~/ 2 - Margin - BarWidth ~/ 2) ~/ (_maxDiscs + 1);
     _currentDiscs = 0;
     _listRectangles = new List<DiscRectangle>();
 
@@ -42,6 +44,7 @@ class TowerHanoiView {
   // getter / setter
   CanvasRenderingContext2D get _Context => _canvas.context2D;
   bool get Invalid => _invalid;
+  int get MaxDiscs => _maxDiscs;
 
   // public interface
   void render() {
@@ -78,14 +81,14 @@ class TowerHanoiView {
   }
 
   void push(int size) {
-    assert(size >= 1 && size <= _numDiscs);
-    if (_currentDiscs == _numDiscs) return;
+    assert(size >= 1 && size <= _maxDiscs);
+    if (_currentDiscs == _maxDiscs) return;
     if (_downSimulationIsActive || _upSimulationIsActive) return;
 
     _currentDiscs++;
-    int left = Margin + _delta * (_numDiscs - size + 1);
+    int left = Margin + _delta * (_maxDiscs - size + 1);
     int top = _height - (_currentDiscs + 1) * BarHeight - Margin;
-    int width = _width - 2 * Margin - 2 * _delta * (_numDiscs - size + 1);
+    int width = _width - 2 * Margin - 2 * _delta * (_maxDiscs - size + 1);
     int height = BarHeight;
 
     DiscRectangle rect = new DiscRectangle(size, left, top, width, height);
@@ -96,8 +99,8 @@ class TowerHanoiView {
   }
 
   void pushAnimated(int size) {
-    assert(size >= 1 && size <= _numDiscs);
-    if (_currentDiscs == _numDiscs) return;
+    assert(size >= 1 && size <= _maxDiscs);
+    if (_currentDiscs == _maxDiscs) return;
     if (_downSimulationIsActive || _upSimulationIsActive) return;
 
     print("pushAnimated");
@@ -109,9 +112,9 @@ class TowerHanoiView {
     print(sprintf("pushAnimated ==> # discs = %d", [_listRectangles.length]));
 
     // create a floating rectangle
-    int left = Margin + _delta * (_numDiscs - size + 1);
+    int left = Margin + _delta * (_maxDiscs - size + 1);
     int top = 3 * Margin;
-    int width = _width - 2 * Margin - 2 * _delta * (_numDiscs - size + 1);
+    int width = _width - 2 * Margin - 2 * _delta * (_maxDiscs - size + 1);
     int height = BarHeight;
 
     _floatingRect = new DiscRectangle(size, left, top, width, height);
@@ -205,61 +208,5 @@ class TowerHanoiView {
       ..closePath()
       ..strokeStyle = "black"
       ..stroke();
-  }
-}
-
-// helper classes
-class DiscRectangle {
-  // member data
-  int _size;
-  int _top;
-  final int _left;
-  final int _width;
-  final int _height;
-
-  // default c'tor
-  DiscRectangle.origin()
-      : _size = 0,
-        _left = 0,
-        _top = 0,
-        _width = 0,
-        _height = 0 {}
-
-  // user-defined c'tor
-  DiscRectangle(int size, int left, int top, int width, int height)
-      : _size = size,
-        _left = left,
-        _top = top,
-        _width = width,
-        _height = height {}
-
-  DiscRectangle.clone(DiscRectangle rect)
-      : _size = rect.Size,
-        _left = rect.Left,
-        _top = rect.Top,
-        _width = rect.Width,
-        _height = rect.Height {}
-
-  // getters and setters
-  int get Size => _size;
-  int get Left => _left;
-  int get Top => _top;
-  int get Width => _width;
-  int get Height => _height;
-
-  // public interface
-  void moveUp() {
-    _top--;
-  }
-
-  void moveDown() {
-    _top++;
-  }
-
-  @override
-  String toString() {
-    return sprintf(
-        "DiscRectangle: Left=%d, Top=%d, Width=%d, Height=%d (Size=%d)",
-        [_left, _top, _width, _height, _size]);
   }
 }
